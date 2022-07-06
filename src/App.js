@@ -1,7 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Container, Row, Col} from "react-bootstrap"
 
 function App() {
   const [item, setItem] = useState({
@@ -98,7 +99,9 @@ function App() {
   return (
     <div className="App">
       {!isPut ? (
-        <div className="main">
+
+
+      <div className="main">
           <input
             onChange={handleChange}
             name="title"
@@ -111,8 +114,12 @@ function App() {
             value={item.description}
             placeholder="description"
           ></input>
-          <button onClick={addItem}>ADD ITEM</button>
+          <Button variant="primary" onClick={addItem}>ADD ITEM</Button>
         </div>
+
+
+
+
       ) : (
         <div className="main">
           <input
@@ -127,21 +134,29 @@ function App() {
             value={updatedItem.description}
             placeholder="description"
           ></input>
-          <button onClick={() => updateItem(updatedItem.id)}>
-            UPDATE ITEM
-          </button>
+          <Button variant="primary" onClick={() => updateItem(updatedItem.id)}>UPDATE ITEM</Button>
         </div>
       )}
       {items.map((item) => {
         return (
           <div
             key={item._id}
-            style={{ background: "pink", width: "60%", margin: "auto auto" }}
+            style={{ background: "LightGray", width: "40%", top: "100%", margin: "auto auto"}}
           >
-            <p>{item.title}</p>
-            <p>{item.description}</p>
-            <button onClick={() => deleteItem(item._id)}>DELETE</button>
-            <button onClick={() => openUpdate(item._id)}>UPDATE</button>
+            {/* <Container>
+              <Row>
+                <Col><p>{item.title}</p></Col>
+                <Col><p>{item.description}</p></Col>
+                <Col><Button variant="warning" onClick={() => openUpdate(item._id)}>UPDATE</Button></Col>
+                <Col><Button variant="danger" onClick={() => deleteItem(item._id)}>Delete</Button></Col>
+              </Row>
+            </Container> */}
+            <div>
+              <p>{item.title}</p>
+              <p>{item.description}</p>
+              <Button variant="warning" onClick={() => openUpdate(item._id)}>UPDATE</Button>
+              <Button variant="danger" onClick={() => deleteItem(item._id)}>Delete</Button>
+            </div>
           </div>
         );
       })}
